@@ -1,10 +1,11 @@
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,12 +15,12 @@ import java.util.Date;
 
 /**
  *
- * @author christian
+ * @author Stavri Mele
  */
 public class ServerTCPOgg {
     int port;
-    DataInputStream in;
-    DataOutputStream out;
+    Scanner in;
+    PrintWriter out;
     Date now;
     //oggetto ServerSocket necessario per accettare richieste dal client
     ServerSocket sSocket;
@@ -46,8 +47,8 @@ public class ServerTCPOgg {
             System.out.println("Socket server: " + connection.getLocalSocketAddress());
             System.out.println("Socket client: " + connection.getRemoteSocketAddress());
             //lettura dal client
-            in = new DataInputStream(connection.getInputStream());
-            System.out.println("il client ha detto: " + in.readUTF());   
+            in = new Scanner(connection.getInputStream());
+            System.out.println("il client ha detto: " + in.nextLine());   
         }
            catch(Exception e){
                System.err.println("Errore di I/O!");
@@ -55,8 +56,8 @@ public class ServerTCPOgg {
         now=new Date();
         try
         {
-        out = new DataOutputStream(connection.getOutputStream());
-        out.writeUTF(String.valueOf(now));
+        out = new PrintWriter(connection.getOutputStream());
+        out.println(String.valueOf(now));
         out.flush();
         connection.close();
         }

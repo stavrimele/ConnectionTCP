@@ -1,10 +1,10 @@
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,14 +14,14 @@ import java.net.UnknownHostException;
 
 /**
  *
- * @author christian
+ * @author Stavri Mele
  */
 public class ClientTCPOgg {
     Socket connection = null;
     String serverAddress = "";
     int port;
-    DataOutputStream out=null;
-    DataInputStream in= null;
+    PrintWriter out=null;
+    Scanner in= null;
     public ClientTCPOgg()
     {   
         //nome o IP del server
@@ -53,15 +53,15 @@ public class ClientTCPOgg {
     {
         try
         {
-        out = new DataOutputStream(connection.getOutputStream());
-        out.writeUTF("voglio la data");
+        out = new PrintWriter(connection.getOutputStream());
+        out.println("voglio la data");
         out.flush();
         //scrittura su out
         //leggere la risposta
         //lettura dal client
-        in = new DataInputStream(connection.getInputStream());
+        in = new Scanner(connection.getInputStream());
         System.out.println("sono dentro parla client");
-        System.out.println("il server ha detto: " + in.readUTF());
+        System.out.println("il server ha detto: " + in.nextLine());
         connection.close();
         }
         catch(IOException e)
