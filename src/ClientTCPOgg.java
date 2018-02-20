@@ -14,7 +14,7 @@ import java.net.UnknownHostException;
 
 /**
  *
- * @author christian
+ * @author Stavri Mele
  */
 public class ClientTCPOgg {
     Socket connection = null;
