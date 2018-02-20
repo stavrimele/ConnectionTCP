@@ -14,7 +14,7 @@ import java.util.Date;
 
 /**
  *
- * @author christian
+ * @author Stavri Mele
  */
 public class ServerTCPOgg {
     int port;
